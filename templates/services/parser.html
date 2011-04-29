@@ -1,0 +1,38 @@
+{% extends "bleep/base.html" %}
+
+{% block content %}
+<p>
+  <strong><a href="/services">Back to services ...</a></strong>
+</p>
+<h2>{{ parser.get_name }}</h2>
+
+
+<div class="gmeta" style="margin-left:5px">
+  {{ parser.get_doc }} 
+</div>
+
+<div class="gmeta" style="margin-left:5px">
+  Content-type: {{ parser.get_content_type }}
+</div>
+
+<div style="margin: 10px;">
+<p><strong>Try it</strong></p>
+  <div>
+    <form action="/parsers/{{ parser.get_name }}/perform" method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <p class="btns">
+	<input class="button" type="submit" value="Submit" />
+      </p>
+    </form>
+  </div>
+  <div>
+    {% if parse_result %}
+    <p><strong>Parse result:</strong></p>
+    <p>
+      {{ parse_result }}
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
+

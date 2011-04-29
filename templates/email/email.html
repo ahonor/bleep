@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+      background-color:#ddd;
+      font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size:100%;
+      margin:0;
+      padding:0;
+      border:0;
+      padding: 20px;
+      }
+      #docbody{
+      margin: 0 auto;
+      background:white;
+      padding:10px 20px;
+      width: 600px;
+      }
+      #execdesc {
+      margin: 10px;
+      color: black;
+      border:1px solid #ddd;
+      border-width: 5px 2px 2px 5px;
+      background: #eee;
+      padding: 10px;
+      }
+      #footer {
+      font-size:75%;
+      padding: 1px 2px 5px 5px;
+      }
+      a:link {
+      color:#444;
+      font-weight:bold;
+      }
+    </style>
+    <body>
+      <div id="docbody">
+	<table>
+	  <tr>
+	    <td><img src="cid:bleepLogo.png"  alt="BleeP"/></td>
+	    <td>{{bleep_message}}</td>
+	  </tr>
+	</table>
+	<hr/>
+	<p>
+	  On {{ bleep_pub_date }} the {{ bleep_client }} client
+	  posted a message for this service {{ bleep_service }}.
+	</p>
+	<p>
+	  You can access the message here:
+	  <a href="{{ site_url }}/{{ bleep_url }}">
+	    {{ site_url }}{{ bleep_url }}
+	  </a>
+	</p>
+	<p>
+	  <span id="footer">
+	    This notification was sent by {{  bleep_client }} courtesy of Bleep!
+	  </span>
+	</p>
+      </div>
+
+    </body>
+</html>

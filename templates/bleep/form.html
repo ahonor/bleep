@@ -1,0 +1,19 @@
+{% extends "bleep/base.html" %}
+{% block content %}
+
+{% if form.errors %}
+<p style="color: red;">
+  Plese correct the error{{ form.errors|pluralize }} below.
+</p>
+{% endif %}
+
+<form enctype="multipart/form-data" action="/bleeps/update" method="post" id="bleep_form">
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+<p class="btns">
+<input class="button" type="submit" value="Submit" />
+</p>
+</form>
+{% endblock %}

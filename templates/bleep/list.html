@@ -1,0 +1,88 @@
+{% extends "bleep/base.html" %}
+{% block rssfeed %}
+<link rel="alternate"  type="application/rss+xml"
+      title="Bleep feed" href="/feeds/latest" />
+{% endblock %}
+
+{% block content %}
+<table width="100%" border="0">
+  <tr>
+    <td>
+      <strong><a href="/bleeps/bleep">Add a bleep</a></strong>
+    </td>
+    <td align="right">
+      <form action="/bleeps/search/" method="post">{% csrf_token %}
+	<input type="text" name="keyword" id="bleep_search_keyword"/>
+	<input class="button" type="submit" value="Search" />    
+      </form>
+    </td>
+    <td align="right" width="15">
+      <a href="/feeds/latest">
+	<img src="/assets/images/feed.png" alt="rss"/>
+      </a>
+    </td>
+  </tr>
+</table>
+
+{% if bleep_list %}
+<!-- dated-list -->
+<div class="dated-list">
+  <div class="message-list">    
+    <ul id="messages" class="messages">
+      {% for bleep in bleep_list.object_list %}
+      <li class="msg ">
+	<h3><a href="/bleeps/{{ bleep.id }}/">{{ bleep.bleep_message }}</a></h3>
+	<div class="msg-meta">
+	  {% if bleep.is_sendable %}
+	  <strong><a href="/bleeps/{{ bleep.id }}/send">Send it!</a></strong>
+	  {% endif %}
+	  {% if bleep.bleep_status == 'comp' %}
+	  <img src="/assets/images/icon-small-ok.png" alt="Bleep sent"/>
+	  {% endif %}
+	  {% if bleep.bleep_status == 'fail' %}
+	  <img src="/assets/images/icon-small-error.png" alt="Bleep failed"/>
+	  {% endif %}
+
+	  Posted by  {{ bleep.bleep_client }}
+	  on {{ bleep.bleep_pub_date }}
+	  Forwarded to service: 
+	  <a href="/services/{{ bleep.bleep_service }}">{{ bleep.bleep_service }}</a>
+	</div>
+	<div class="lil">
+	  {{ bleep.last_log.timestamp|date:"P" }}
+	  {{ bleep.last_log.message }}
+	</div>
+	<p class="day-break">
+	  {% if bleep.was_published_today %}
+	  <span class="num">{{bleep.bleep_pub_date|date:"P"}}</span>
+	  {% else %}
+          <span class="day">{{bleep.bleep_pub_date|date:"l"}}</span>
+          <span class="num">{{bleep.bleep_pub_date|date:"M d"}}</span>
+	  {% endif %}
+	</p>	   
+      </li>  
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p></p>
+    {% endif %}
+    <!--/message-list-->
+  </div>
+  <!--/dated-list-->
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if bleep_list.has_previous %}
+            <a href="?page={{ bleep_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ bleep_list.number }} of {{ bleep_list.paginator.num_pages }}.
+        </span>
+
+        {% if bleep_list.has_next %}
+            <a href="?page={{ bleep_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "bleep/base.html" %}
+
+{% block content %}
+<p>
+  <strong><a href="/services">Services and parsers ...</a></strong>
+</p>
+
+<h2>{{ service.get_service_type }}</h2>
+
+
+<div class="gmeta" style="margin-left:5px">
+{{ service.get_doc }} [ {{ service.get_name }} ]
+</div>
+
+  <div style="margin: 10px;">
+    <p><strong>Try it:</strong></p>
+
+    <form action="/services/{{ service.get_service_type }}/perform" 
+	  method="post">{% csrf_token %}
+      <p>Input</p>
+      <table style="margin: 10px;">
+	{{ form.as_table }}
+      </table>
+      <p class="btns">
+	<input class="button" type="submit" value="Submit" />
+      </p>
+
+    </form>
+
+  </div>
+  <div>
+    {% if result %}
+    <p><strong>Service result:</strong></p>
+    <p>
+      {{ result }}
+    </p>
+    {% endif %}
+  </div>
+</div>
+
+
+
+{% endblock content %}
+

@@ -1,0 +1,5 @@
+Bleep notification from: {{bleep_client}}
+==================================================
+Message sent: {{ bleep_pub_date }}
+--------------------------------------------------
+{{bleep_message}}

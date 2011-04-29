@@ -1,0 +1,80 @@
+{% extends "bleep/base.html" %}
+
+{% block rssfeed %}
+<link rel="alternate"  type="application/rss+xml"
+      title="Bleep feed" href="/feeds/comments/bleep/{{ bleep.id }}" />
+{% endblock %}
+
+{% block content %}
+<strong><p><a href="/bleeps">Back to bleeps ...</a></p></strong>
+
+<h2>{{ bleep.bleep_message }}</h2>
+
+
+<div class="gmeta" style="margin-left:5px;margin-top:2px;">
+{% if bleep.is_sendable %}
+<strong><a href="/bleeps/{{ bleep.id }}/send">Send it !</a></strong>
+{% endif %}
+{% if bleep.bleep_status == 'comp' %}
+<img src="/assets/images/icon-small-ok.png" alt="Bleep sent"/>
+{% endif %}
+{% if bleep.bleep_status == 'fail' %}
+<img src="/assets/images/icon-small-error.png" alt="Bleep failed"/>
+{% endif %}
+
+  Posted by client: {{ bleep.bleep_client }} 
+  on: {{ bleep.bleep_pub_date }}
+  for service: <a href="/services/{{ bleep.bleep_service }}">{{ bleep.bleep_service }}</a>
+</div>
+
+{% if bleep.comment_set > 1 %}
+<h3>Comments</h3>
+
+<!-- dated-list -->
+<div class="dated-list">
+  <div class="message-list">    
+    <ul id="messages" class="messages">
+      {% for comment in bleep.comment_set.all %}
+      <li class="msg">
+	<h3> {{ comment.message }}</h3>
+	<div class="msg-meta">
+	  {{comment.status}} {{ comment.category }} 
+	  by: {{ comment.user|default:"system" }}
+	</div>
+	<p class="day-break">
+	  {% if forloop.counter == 1 %}
+	  <span class="day">{{ comment.timestamp|date:"l"}}</span>
+	  {% endif %}
+	  <span class="num">{{ comment.timestamp|date:"P"}}</span>
+	</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+
+{%if comment_form %}
+<div id="comment_form">
+<form action="/bleeps/{{ bleep.id }}/comment"
+      method="post">{% csrf_token %}
+  {{ comment_form.message }}
+      <input type="submit" value="Add comment"/>
+</form>
+</div>
+{% endif %}
+
+
+<h3 onclick="$('#bleep_data').toggle('slow')" >Bleep data</h3>
+<div style="margin:10px;display:none" id="bleep_data">
+<h4>POST content: {{ bleep.bleep_content_type }}</h4>
+<pre><code>{{ bleep.bleep_post_data}}</code></pre>
+
+
+<h4>Query params</h4>
+<pre><code>{{ bleep.bleep_get_data }}</code></pre>
+
+</div>
+
+{% endblock %}

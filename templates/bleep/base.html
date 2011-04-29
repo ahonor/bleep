@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <script type="text/javascript" src="/assets/js/jquery-1.5.2.js"></script>
+
+    {% block rssfeed %}{% endblock %}
+    <title>Bleep !</title>
+  </head>
+  <body>
+    <!-- container -->
+    <div id="container">    
+
+      <!-- header -->
+      <div id="header" class="clear">
+	<div id="titles">
+	  <a href="/bleeps">
+	    <img style="padding: 20px;" src="/assets/images/bleep-logo-orange-bg.png" alt="logo"/>
+	  </a>
+	</div>	
+	<!-- userbadge -->
+	<div id="rheader">
+	  <div id="userbadge">
+	    <div class="ubody">
+	      <div id="ublinks">
+		<a href="/accounts/logout?">Sign out</a> | 
+		<a id="help" href="/help" title="Help">Help</a>
+	      </div>
+	      <a href="/registration/profile/">
+	      User: <strong id="account-name">{{ user.username|default:"anonymous" }}</strong>
+	      </a>
+	      <!--/ubody-->
+	    </div>
+	    <!-- /userbadge -->
+	  </div>	  
+	  <!-- /rheader -->
+	</div>		
+	<!-- /header-->
+      </div>
+
+      <!-- content -->
+      <div id="content">
+	<div id="main">        
+          <div id="main-content" class="clear">
+	    {% block content %}{% endblock %}
+	  </div>
+	  <!-- /main -->
+	</div>
+
+	<!-- /content -->
+      </div>
+
+      <!-- footer -->
+      <div id="footer">
+	<div id="footer-cnt">
+	  <p>Copyright &copy; 2011 <a href="http://dtolabs.com">DTO Labs</a>.</p>
+	</div>
+	<!-- /footer -->
+      </div>
+      <!-- /container -->
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "bleep/base.html" %}
+{% block content %}
+
+<strong><p><a href="/bleeps">Back to bleeps ...</a></p></strong>
+
+{% if form.errors %}
+<p style="color: red;">
+  Plese correct the error{{ form.errors|pluralize }} below.
+</p>
+{% endif %}
+
+<div class="group">
+<form enctype="multipart/form-data" action="/bleeps/bleep" 
+      method="post" id="bleep_form">
+{{ form.as_p }}
+
+<p class="btns">
+<input class="button" type="submit" value="Submit" />
+</p>
+</form>
+</div>
+{% endblock %}

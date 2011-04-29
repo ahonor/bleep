@@ -1,0 +1,9 @@
+{% if latest_bleep_list %}
+    <ul>
+    {% for bleep in latest_bleep_list %}
+        <li><a href="/bleeps/{{ bleep.id }}/">{{ bleep.sender }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No bleeps are available.</p>
+{% endif %}

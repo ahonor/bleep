@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+      background-color:#ddd;
+      font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size:100%;
+      margin:0;
+      padding:0;
+      border:0;
+      padding: 20px;
+      }
+      #docbody{
+      margin: 0 auto;
+      background:white;
+      padding:10px 20px;
+      width: 600px;
+      }
+      #execdesc {
+      margin: 10px;
+      color: black;
+      border:1px solid #ddd;
+      border-width: 5px 2px 2px 5px;
+      background: #eee;
+      padding: 10px;
+      }
+      #footer {
+      font-size:75%;
+      padding: 1px 2px 5px 5px;
+      }
+      a:link {
+      color:#444;
+      font-weight:bold;
+      }
+    </style>
+    <body>
+      <div id="docbody">
+	<table>
+	  <tr>
+	    <td><img src="cid:bleepLogo.png"  alt="BleeP"/></td>
+	    <td>{{digest_date}}</td>
+	  </tr>
+	</table>
+	<hr/>
+	<h3>Your daily digest</h3>
+	<p>Bleeps added in the last 24 hours</p>
+	{% if bleeps %}
+	<!-- dated-list -->
+	<div class="dated-list">
+	  <div class="message-list">    
+	    <ul id="messages" class="messages">
+	      {% for bleep in bleeps %}
+	      <li class="msg ">
+		<h4><a href="/bleeps/{{ bleep.id }}/">{{ bleep.bleep_message }}</a></h4>
+		<div class="msg-meta">
+		  Posted by  {{ bleep.bleep_client }}
+		  on {{ bleep.bleep_pub_date }}
+		  Forwarded to:  {{ bleep.bleep_service }}
+		</div>
+		<div class="lil">
+		  {{ bleep.last_log.timestamp|date:"P" }}
+		  {{ bleep.last_log.message }}
+		</div>
+		<p class="day-break">
+		  {% if bleep.was_published_today %}
+		  <span class="num">{{bleep.bleep_pub_date|date:"P"}}</span>
+		  {% else %}
+		  <span class="day">{{bleep.bleep_pub_date|date:"l"}}</span>
+		  <span class="num">{{bleep.bleep_pub_date|date:"M d"}}</span>
+		  {% endif %}
+		</p>	   
+	      </li>  
+	      {% endfor %}
+	    </ul>
+	    <!--/message-list-->
+	  </div>
+	  <!--/dated-list-->
+	</div>
+	{% endif %}
+	<span id="footer">
+	  This notification was sent by {{  bleep_client }} courtesy of Bleep!
+	</span>
+</div>
+
+</body>
+</html>

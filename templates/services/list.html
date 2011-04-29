@@ -1,0 +1,40 @@
+{% extends "bleep/base.html" %}
+{% block content %}
+
+<h2>services</h2>
+<div class="desc">
+<ul>
+
+{% for svc in services_list %}
+{% if svc.get_service_type %}
+     <li> 
+       <div>
+	 <a href="/services/{{ svc.get_service_type }}/">
+     {{ svc.get_service_type }}: {{ svc.get_doc }} [ {{ svc.get_name }} ]
+	 </a>
+       </div>
+     </li>
+{% endif %}
+{% endfor %}
+
+</ul>
+</div>
+
+
+<h2>parsers</h2>
+<div class="desc">
+<ul>
+
+{% for parser in parsers_list %}
+     <li> 
+       <div>
+	 <a href="/parsers/{{ parser.get_name }}/">
+     {{ parser.get_content_type }}: {{ parser.get_doc }} [ {{ parser.get_name }} ]
+	 </a>
+       </div>
+     </li>
+{% endfor %}
+
+</ul>
+</div>
+{% endblock %}
