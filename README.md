@@ -31,12 +31,6 @@ Quite a lot! How about some unit tests?
 ### Services and Parsers
 
 
-## Following along
-
-* Email: bleep-discuss - Google group discussion
-* Twitter: bleepdeck - news going on in the Bleep! development and user community.
-
-
 ## License
 
 Copyright 2011 DTO Solutions
