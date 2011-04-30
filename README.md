@@ -30,6 +30,7 @@ Quite a lot! How about some unit tests?
 
 ### Services and Parsers
 
+See [Concepts](https://github.com/dtolabs/bleep/wiki/Concepts)
 
 ## License
 
