@@ -141,8 +141,12 @@ class EmailService(BleepService):
 
 
   def __logo_attachment(self, parent_dir):
-    fp = open(os.path.join(
-      parent_dir, "assets","bleep-logo.png"),'rb'); # read as binary
+    image_file = os.path.join(
+        parent_dir, "assets/images","bleep-logo.png")
+    try:
+      fp = open(image_file,'rb'); # read as binary
+    except IOError as (e):
+      raise BleepServiceError(e)
     msgImage = MIMEImage(fp.read())
     fp.close()
     msgImage.add_header('Content-ID', '<bleepLogo.png>')
