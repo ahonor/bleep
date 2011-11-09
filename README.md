@@ -18,7 +18,7 @@ Bleep! is an open source project built on the
 
 ### Configuration
 
-Edit django settings.py file to set INSTALL_DIR and database.
+Edit django settings.py file to set up the database.
 
 ## TODO
 

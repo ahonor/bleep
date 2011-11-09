@@ -1,14 +1,16 @@
 # Django settings for bleep project.
 
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-INSTALL_DIR='/Users/alexh/bleep-workspace/bleep'
+INSTALL_DIR= os.path.dirname(os.path.abspath(__file__))
 
 # Update the modules path here
 print 'debuggery: Updating the modules path in %s !' % __file__
 import sys
-sys.path.append(INSTALL_DIR+'/services')
+sys.path.append(os.path.join(INSTALL_DIR, 'services'))
 
 
 ADMINS = (
@@ -20,7 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/alexh/bleep-workspace/bleep/sqlite3.db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(INSTALL_DIR, 'sqlite3.db'), # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -94,7 +96,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    INSTALL_DIR+"/templates",
+    os.path.join(INSTALL_DIR, "/templates"),
 )
 
 INSTALLED_APPS = (
@@ -110,7 +112,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-STATIC_DOC_ROOT = INSTALL_DIR+'/assets'
+STATIC_DOC_ROOT = os.path.join(INSTALL_DIR, 'assets')
 
 
 AUTH_PROFILE_MODULE = "bleeps.UserProfile"
