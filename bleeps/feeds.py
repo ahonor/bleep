@@ -1,5 +1,6 @@
 from django.contrib.syndication.feeds import Feed
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 
 from bleeps.models import Bleep
 
@@ -12,6 +13,7 @@ class LatestEntries(Feed):
         return Bleep.objects.order_by('-bleep_pub_date')[:5]
 
     def item_link(self):
+        # TODO: Fix this busted url
         return "/bleeps/%s" 
 
 class LatestComments(Feed):
