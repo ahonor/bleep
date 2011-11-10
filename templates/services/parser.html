@@ -2,13 +2,13 @@
 
 {% block content %}
 <p>
-  <strong><a href="/services">Back to services ...</a></strong>
+  <strong><a href="{% url services_list %}">Back to services ...</a></strong>
 </p>
 <h2>{{ parser.get_name }}</h2>
 
 
 <div class="gmeta" style="margin-left:5px">
-  {{ parser.get_doc }} 
+  {{ parser.get_doc }}
 </div>
 
 <div class="gmeta" style="margin-left:5px">
@@ -18,7 +18,7 @@
 <div style="margin: 10px;">
 <p><strong>Try it</strong></p>
   <div>
-    <form action="/parsers/{{ parser.get_name }}/perform" method="post">{% csrf_token %}
+    <form action="{% url parsers_perform parser.get_name %}" method="post">{% csrf_token %}
       {{ form.as_p }}
       <p class="btns">
 	<input class="button" type="submit" value="Submit" />

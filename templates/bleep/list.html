@@ -8,17 +8,17 @@
 <table width="100%" border="0">
   <tr>
     <td>
-      <strong><a href="/bleeps/bleep">Add a bleep</a></strong>
+      <strong><a href="{% url bleep_add %}">Add a bleep</a></strong>
     </td>
     <td align="right">
-      <form action="/bleeps/search/" method="post">{% csrf_token %}
+      <form action="{% url search %}" method="post">{% csrf_token %}
 	<input type="text" name="keyword" id="bleep_search_keyword"/>
-	<input class="button" type="submit" value="Search" />    
+	<input class="button" type="submit" value="Search" />
       </form>
     </td>
     <td align="right" width="15">
       <a href="/feeds/latest">
-	<img src="/assets/images/feed.png" alt="rss"/>
+	<img src="{{ MEDIA_URL }}images/feed.png" alt="rss"/>
       </a>
     </td>
   </tr>
@@ -27,14 +27,14 @@
 {% if bleep_list %}
 <!-- dated-list -->
 <div class="dated-list">
-  <div class="message-list">    
+  <div class="message-list">
     <ul id="messages" class="messages">
       {% for bleep in bleep_list.object_list %}
       <li class="msg ">
-	<h3><a href="/bleeps/{{ bleep.id }}/">{{ bleep.bleep_message }}</a></h3>
+	<h3><a href="{% url bleep_show  bleep.id %}">{{ bleep.bleep_message }}</a></h3>
 	<div class="msg-meta">
 	  {% if bleep.is_sendable %}
-	  <strong><a href="/bleeps/{{ bleep.id }}/send">Send it!</a></strong>
+	  <strong><a href="{% url bleep_send bleep.id %}">Send it!</a></strong>
 	  {% endif %}
 	  {% if bleep.bleep_status == 'comp' %}
 	  <img src="/assets/images/icon-small-ok.png" alt="Bleep sent"/>
@@ -45,8 +45,8 @@
 
 	  Posted by  {{ bleep.bleep_client }}
 	  on {{ bleep.bleep_pub_date }}
-	  Forwarded to service: 
-	  <a href="/services/{{ bleep.bleep_service }}">{{ bleep.bleep_service }}</a>
+	  Forwarded to service:
+	  <a href="{% url services_show bleep.bleep_service %}">{{ bleep.bleep_service }}</a>
 	</div>
 	<div class="lil">
 	  {{ bleep.last_log.timestamp|date:"P" }}
@@ -59,8 +59,8 @@
           <span class="day">{{bleep.bleep_pub_date|date:"l"}}</span>
           <span class="num">{{bleep.bleep_pub_date|date:"M d"}}</span>
 	  {% endif %}
-	</p>	   
-      </li>  
+	</p>
+      </li>
       {% endfor %}
     </ul>
     {% else %}

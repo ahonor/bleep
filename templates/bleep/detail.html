@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block content %}
-<strong><p><a href="/bleeps">Back to bleeps ...</a></p></strong>
+<strong><p><a href="{% url bleeps %}">Back to bleeps ...</a></p></strong>
 
 <h2>{{ bleep.bleep_message }}</h2>
 
 
 <div class="gmeta" style="margin-left:5px;margin-top:2px;">
 {% if bleep.is_sendable %}
-<strong><a href="/bleeps/{{ bleep.id }}/send">Send it !</a></strong>
+<strong><a href="{% url bleep_send bleep.id %}">Send it !</a></strong>
 {% endif %}
 {% if bleep.bleep_status == 'comp' %}
 <img src="/assets/images/icon-small-ok.png" alt="Bleep sent"/>
@@ -22,9 +22,9 @@
 <img src="/assets/images/icon-small-error.png" alt="Bleep failed"/>
 {% endif %}
 
-  Posted by client: {{ bleep.bleep_client }} 
+  Posted by client: {{ bleep.bleep_client }}
   on: {{ bleep.bleep_pub_date }}
-  for service: <a href="/services/{{ bleep.bleep_service }}">{{ bleep.bleep_service }}</a>
+  for service: <a href="{% url services_show bleep.bleep_service %}">{{ bleep.bleep_service }}</a>
 </div>
 
 {% if bleep.comment_set > 1 %}
@@ -32,13 +32,13 @@
 
 <!-- dated-list -->
 <div class="dated-list">
-  <div class="message-list">    
+  <div class="message-list">
     <ul id="messages" class="messages">
       {% for comment in bleep.comment_set.all %}
       <li class="msg">
 	<h3> {{ comment.message }}</h3>
 	<div class="msg-meta">
-	  {{comment.status}} {{ comment.category }} 
+	  {{comment.status}} {{ comment.category }}
 	  by: {{ comment.user|default:"system" }}
 	</div>
 	<p class="day-break">
@@ -57,7 +57,7 @@
 
 {%if comment_form %}
 <div id="comment_form">
-<form action="/bleeps/{{ bleep.id }}/comment"
+<form action="{% url bleep_comment bleep.id %}"
       method="post">{% csrf_token %}
   {{ comment_form.message }}
       <input type="submit" value="Add comment"/>

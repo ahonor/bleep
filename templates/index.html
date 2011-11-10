@@ -1,7 +1,7 @@
 {% if latest_bleep_list %}
     <ul>
     {% for bleep in latest_bleep_list %}
-        <li><a href="/bleeps/{{ bleep.id }}/">{{ bleep.sender }}</a></li>
+        <li><a href="{% url bleep_show bleep.id %}">{{ bleep.sender }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

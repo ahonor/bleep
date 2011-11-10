@@ -7,9 +7,9 @@
 
 {% for svc in services_list %}
 {% if svc.get_service_type %}
-     <li> 
+     <li>
        <div>
-	 <a href="/services/{{ svc.get_service_type }}/">
+	 <a href="{% url services_show svc.get_service_type %}">
      {{ svc.get_service_type }}: {{ svc.get_doc }} [ {{ svc.get_name }} ]
 	 </a>
        </div>
@@ -26,9 +26,9 @@
 <ul>
 
 {% for parser in parsers_list %}
-     <li> 
+     <li>
        <div>
-	 <a href="/parsers/{{ parser.get_name }}/">
+	 <a href="{% url parsers_show parser.get_name %}">
      {{ parser.get_content_type }}: {{ parser.get_doc }} [ {{ parser.get_name }} ]
 	 </a>
        </div>

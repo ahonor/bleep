@@ -2,7 +2,7 @@
 
 {% block content %}
 <p>
-  <strong><a href="/services">Services and parsers ...</a></strong>
+  <strong><a href="{% url services_list %}">Services and parsers ...</a></strong>
 </p>
 
 <h2>{{ service.get_service_type }}</h2>
@@ -15,7 +15,7 @@
   <div style="margin: 10px;">
     <p><strong>Try it:</strong></p>
 
-    <form action="/services/{{ service.get_service_type }}/perform" 
+    <form action="{% url services_perform service.get_service_type %}"
 	  method="post">{% csrf_token %}
       <p>Input</p>
       <table style="margin: 10px;">

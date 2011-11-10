@@ -7,7 +7,7 @@
 </p>
 {% endif %}
 
-<form enctype="multipart/form-data" action="/bleeps/update" method="post" id="bleep_form">
+<form enctype="multipart/form-data" action="{% url bleep_update %}" method="post" id="bleep_form">
 {% csrf_token %}
 <table>
 {{ form.as_table }}

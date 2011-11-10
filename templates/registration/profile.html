@@ -6,7 +6,7 @@
 
 
 <div style="margin: 10px;">
-  <form action="/registration/profile/" 
+  <form action="{% url registration_profile %}"
 	method="post">{% csrf_token %}
     <table style="margin: 10px;">
       {{ form.as_table }}
@@ -31,10 +31,10 @@
   <table>
     <tr>
       <td>
-	<code>{{ token.token }}</code> 
+	<code>{{ token.token }}</code>
       </td>
       <td>
-	<form action="/registration/tokens/{{ token.id }}/delete/"
+	<form action="{% url registration_tokens_delete token.id %}"
 	      method="post">{% csrf_token %}
 	  <input class="button" type="submit" value="Remove"/>
 	</form>
@@ -45,7 +45,7 @@
 
   <h4 style="color: green;" onclick="$('#token_form').toggle()">Add a token</h4>
   <div id="token_form" style="margin: 10px;display:None;">
-    <form action="/registration/tokens/" 
+    <form action="{% url registration_tokens %}"
 	  method="post">{% csrf_token %}
       <input type="hidden" name="user_profile" value="{{ user.profile.id }}"/>
       <table style="margin: 10px;">

@@ -47,11 +47,11 @@
 	{% if bleeps %}
 	<!-- dated-list -->
 	<div class="dated-list">
-	  <div class="message-list">    
+	  <div class="message-list">
 	    <ul id="messages" class="messages">
 	      {% for bleep in bleeps %}
 	      <li class="msg ">
-		<h4><a href="/bleeps/{{ bleep.id }}/">{{ bleep.bleep_message }}</a></h4>
+		<h4><a href="{% url bleeps_show bleep.id %}">{{ bleep.bleep_message }}</a></h4>
 		<div class="msg-meta">
 		  Posted by  {{ bleep.bleep_client }}
 		  on {{ bleep.bleep_pub_date }}
@@ -68,8 +68,8 @@
 		  <span class="day">{{bleep.bleep_pub_date|date:"l"}}</span>
 		  <span class="num">{{bleep.bleep_pub_date|date:"M d"}}</span>
 		  {% endif %}
-		</p>	   
-	      </li>  
+		</p>
+	      </li>
 	      {% endfor %}
 	    </ul>
 	    <!--/message-list-->
