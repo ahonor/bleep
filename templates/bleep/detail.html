@@ -36,7 +36,7 @@
     <ul id="messages" class="messages">
       {% for comment in bleep.comment_set.all %}
       <li class="msg">
-	<h3> {{ comment.message }}</h3>
+	<h3><a name="comment_{{ comment.pk }}"> {{ comment.message }}</a></h3>
 	<div class="msg-meta">
 	  {{comment.status}} {{ comment.category }}
 	  by: {{ comment.user|default:"system" }}
