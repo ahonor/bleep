@@ -11,8 +11,8 @@ urlpatterns = patterns('',
     (r'^registration/', include('registration.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    (r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name="login"),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name="logout"),
 
     (r'^assets/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.STATIC_DOC_ROOT}),
@@ -30,4 +30,3 @@ urlpatterns += patterns('',
     (r'feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
        {'feed_dict':feeds}),
  )
-

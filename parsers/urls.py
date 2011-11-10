@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('parsers.views',
-    (r'^(?P<parser_type>\w+)/$', 'show'),
-    (r'^(?P<parser_type>\w+)/perform$', 'perform'),
+    url(r'^(?P<parser_type>\w+)/$', 'show', name="parsers_show"),
+    url(r'^(?P<parser_type>\w+)/perform$', 'perform', name="parsers_perform"),
 )
 
